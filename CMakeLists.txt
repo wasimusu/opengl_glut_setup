@@ -22,10 +22,16 @@ if (NOT GLUT_FOUND)
     message(ERROR " Glut not found!")
 endif(NOT GLUT_FOUND)
 
+find_package(GLEW)
+if (GLEW_FOUND)
+    include_directories(${GLEW_INCLUDE_DIRS})
+endif()
+
 add_executable(opengl_setup
         main.cpp)
 
 target_link_libraries(opengl_setup
         openGL
         GLUT
+        GLEW::GLEW
         )
