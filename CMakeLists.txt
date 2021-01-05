@@ -22,16 +22,27 @@ if (NOT GLUT_FOUND)
     message(ERROR " Glut not found!")
 endif(NOT GLUT_FOUND)
 
+# Find GLEW
 find_package(GLEW)
 if (GLEW_FOUND)
     include_directories(${GLEW_INCLUDE_DIRS})
 endif()
 
+# Find GLM
+include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\glm\\)
+find_package(GLM)
+if (GLM_FOUND)
+    include_directories(${GLM_INCLUDE_DIRS})
+endif()
+
 add_executable(opengl_setup
         main.cpp)
 
+#add_library(opengl1 SHARED IMPORTED)
+#set_property(TARGET opengl1 PROPERTY IMPORTED_LOCATION ${OPENGL_INCLUDE_DIR})
+
 target_link_libraries(opengl_setup
-        openGL
-        GLUT
-        GLEW::GLEW
+#        openGL
+#        GLUT
+#        GLEW::GLEW
         )
