@@ -18,3 +18,9 @@ The lib, dll and bin folder of freeGLUT belong should be pasted in the MINGW dir
 So basically lib of freeGLUT and lib of MINGW get merged and so on.
 
 The same goes for GLEW as well.
+
+##### Note: Take your time to go through the CMake. It will save you lot of time.
+
+
+#### References
+- https://stackoverflow.com/questions/9460242/how-to-compile-glut-opengl-project-with-cmake-and-kdevelop-in-linux

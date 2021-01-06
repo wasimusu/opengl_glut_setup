@@ -5,35 +5,29 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-g -Wall")
 
 # Find OPENGL
-find_package(openGL)
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIRS})
 if (OPENGL_FOUND)
-    message(STATUS " OpenGL found!")
+    message(STATUS " OpenGL found! OPENGL INCLUDE DIR: " ${OPENGL_INCLUDE_DIRS})
 endif(OPENGL_FOUND)
 
 # Find GLUT
 set(PROJECT_DIR C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\)
-
-message(STATUS "PROJECT DIR " ${PROJECT_DIR})
-message(STATUS "OPENGL INCLUDE DIR " ${OPENGL_INCLUDE_DIR})
-
-find_package(GLUT)
-
-if (NOT GLUT_FOUND)
-    message(ERROR " Glut not found!")
-endif(NOT GLUT_FOUND)
+find_package(GLUT REQUIRED)
+include_directories(${GLUT_INCLUDE_DIRS} )
+if (GLUT_FOUND)
+    message(STATUS " Glut found! GLUT INCLUDE DIR: " ${GLUT_INCLUDE_DIR})
+endif(GLUT_FOUND)
 
 # Find GLEW
-find_package(GLEW)
+find_package(GLEW REQUIRED)
 if (GLEW_FOUND)
     include_directories(${GLEW_INCLUDE_DIRS})
 endif()
 
 # Find GLM
 include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\glm\\)
-find_package(GLM)
-if (GLM_FOUND)
-    include_directories(${GLM_INCLUDE_DIRS})
-endif()
+#find_package(GLM REQUIRED)
 
 add_executable(opengl_setup
         main.cpp)
@@ -42,7 +36,7 @@ add_executable(opengl_setup
 #set_property(TARGET opengl1 PROPERTY IMPORTED_LOCATION ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(opengl_setup
-#        openGL
-#        GLUT
-#        GLEW::GLEW
+        ${OPENGL_LIBRARIES}
+        ${GLUT_LIBRARY}
+        GLEW::GLEW
         )
