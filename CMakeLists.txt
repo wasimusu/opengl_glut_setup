@@ -27,13 +27,9 @@ endif()
 
 # Find GLM
 include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\glm\\)
-#find_package(GLM REQUIRED)
 
 add_executable(opengl_setup
         main.cpp)
-
-#add_library(opengl1 SHARED IMPORTED)
-#set_property(TARGET opengl1 PROPERTY IMPORTED_LOCATION ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(opengl_setup
         ${OPENGL_LIBRARIES}
