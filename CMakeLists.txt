@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
 project(opengl_setup)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-g -Wall")
+set(CMAKE_CXX_STANDARD 14)
+
+# lpthread
+# -fsanitize=address or
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-lpthread")
 
 # Find OPENGL
 find_package(OpenGL REQUIRED)
@@ -28,11 +31,26 @@ endif()
 # Find GLM
 include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\glm\\)
 
-add_executable(opengl_setup
-        main.cpp)
+# Project with OpenGL, Glut, GLM, GLEW
+add_executable(opengl_setup main.cpp)
 
 target_link_libraries(opengl_setup
         ${OPENGL_LIBRARIES}
         ${GLUT_LIBRARY}
         GLEW::GLEW
         )
+
+# Project with OpenCV
+SET("OpenCV_DIR" "C:/opencv/build/x64/vc14/lib")
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS} )
+
+MESSAGE(STATUS "Include dirs ${OpenCV_INCLUDE_DIRS}")
+MESSAGE(STATUS "LINK LIBRARIES ${OpenCV_LIBS}")
+
+add_executable(opencv_setup_test opencv_setup_test.cpp)
+target_link_libraries(opencv_setup_test
+        ${OpenCV_LIBS})
+
+# Simple thread test file
+add_executable(thread_test thread_test.cpp)

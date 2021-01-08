@@ -19,6 +19,31 @@ So basically lib of freeGLUT and lib of MINGW get merged and so on.
 
 The same goes for GLEW as well.
 
+
+#### Installing OpenCV by building the OpenCV library
+- It's simple to install the prebuilt binary. Simply download the binary from https://sourceforge.net/projects/opencvlibrary/files/opencv-win/
+and install it. Extract it in ```C:/```. The final structure should look like the following: ```C:/opencv/build, C:\opencv\sources```
+- Set up the environment path so that windows can find OpenCV. Depending on the installation you'll have files similar to the following:
+    - C:\opencv\build\x64\vc14
+    - C:\opencv\build\x64\vc15
+    
+If you have 32 bit system, you will see x84 instead. You need to add these to the environment variables. So that the libraries are discoverable by the compiler.
+
+You might have multiple versions of MinGW installed.
+While the CMAKE compiles and builds your program you need to make sure that uses MinGW-64
+
+#### Thread setup works if you comment out everything else in the CMAKE.
+
+#### Threads
+OpenCV requires threads. Threads are quite complicated to get working on Windows.
+They should not be that hard!
+
+If you used MinGW on Windows and you cannot find threads, you 
+need to open the MinGW Installation Manager and install search for "mingw32-pthreads-w32" packages and install them all.
+
+The threads are properly supported by MinGW-64 so we will install MinGW-64 by downloading it from here.
+https://mingw-w64.org/doku.php/download/mingw-builds
+
 ##### Note: Take your time to go through the CMake. It will save you lot of time.
 
 
