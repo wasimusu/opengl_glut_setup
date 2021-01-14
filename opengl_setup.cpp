@@ -39,5 +39,12 @@ int main(int argc, char ** argv) {
     glutDisplayFunc(display);
     glutMainLoop();
 
+    auto arr3 = glm::vec3(-1.0f, 0.0f, 0.0f);
+    auto arr4 = glm::vec4(-1.0f, 0.0f, 0.0f, 0);
+    std::cout << sizeof(arr3) << std::endl;
+    std::cout << sizeof(arr4) << std::endl;
+    std::cout << "Hello, World!" << std::endl;
+    system("PAUSE");
+
     return 0;
 }
