@@ -1,21 +1,57 @@
 /**
- * Objective: Demonstrate data race.
+ * Objective: Build thread safe counters
+ * Method: Use atomic types or locks for thread safe (increment) operations
  *
- * Definition: Data race is multiple threads trying to manipulate shared data at the same time.
- * For instance, if two threads are trying to increment the same counter the counter may be incremented by 1 or 2
- * which is not a desirable outcome when in fact the counter should be incremented by 2.
- *
- * To resolve this see: thread_safe_counters.cpp
- *
+ * If we reduce the target value to which we are counting, both thread safe and unsafe methods may be able to achieve the
+ * intended result. This makes it harder to debug multi-threaded applications.
  * */
 
-#include <bits/stdc++.h>
+#include <atomic>
 #include <thread>
+#include <cassert>
+#include <iostream>
 #include <mutex>
 
 using namespace std;
 
+std::atomic<int> counter(0);
+int counter2 = 0; // to demonstrate data race
+int counter3 = 0; // to demonstrate locks to prevent data race as an alternative to atomics
+mutex mu;
+
+
+void safe_increment_atomic() {
+    // uses atomic counter to count
+
+    for (int j = 0; j < 1000000; j++) {
+        ++counter;
+    }
+}
+
+// Using locks to avoid data race.
+// if you don't lock the increment section of the code, there will be data race to increment
+// and update the counter leading to false update of the counter
+void safe_increment_lock() {
+    for (size_t j = 0; j < 1000000; j++) {
+        unique_lock<mutex> lock(mu);
+        ++counter3;
+    }
+}
+
+void thread_safe_counter() {
+    // Uses thread safe increment method to count
+
+    // using safe_increment_lock will also work
+    std::thread t1(safe_increment_atomic);
+    std::thread t2(safe_increment_atomic);
+    t1.join();
+    t2.join();
+    assert(counter == 2 * 1000000);
+    cout << "safe counter:\t" << counter << "\tTarget value 2000000" << endl;
+}
+
+
 int main() {
-    thread mu;
+    thread_safe_counter();
     return 0;
 }
