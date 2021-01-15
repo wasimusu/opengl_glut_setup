@@ -23,6 +23,7 @@ target_link_libraries(opencv_setup
 
 # Find OPENGL
 find_package(OpenGL REQUIRED)
+include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\include\\GL\\)
 include_directories(${OPENGL_INCLUDE_DIRS})
 MESSAGE(STATUS "OpenGL LINK LIBRARIES ${OPENGL_LIBRARIES}")
 MESSAGE(STATUS "OpenGL Include dirs ${OPENGL_INCLUDE_DIRS}")
@@ -38,7 +39,7 @@ find_package(GLEW REQUIRED)
 MESSAGE(STATUS "GLEW Include dirs ${GLEW_INCLUDE_DIR}")
 
 # Find GLM
-include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\glm\\)
+include_directories(C:\\Users\\A02290691\\CLionProjects\\opengl_setup\\include\\glm\\)
 add_executable(glm_setup glm_setup.cpp)
 
 # Project with OpenGL, Glut, GLM, GLEW | 1. Works
